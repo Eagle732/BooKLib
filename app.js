@@ -8,6 +8,14 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var catalogRouter = require('./routes/catalog');
 var app = express();
+var compression = require('compression');
+var helmet = require('helmet');
+
+// Create the Express application object
+var app = express();
+
+app.use(helmet());
+app.use(compression());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,7 +46,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://BookLib:BookLib123@ds037415.mlab.com:37415/knekt';
+var mongoDB = process.env.MONGODB_URI || 'mongodb://BookLib:BookLib123@ds037415.mlab.com:37415/knekt';
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
