@@ -18,7 +18,8 @@ exports.author_list = function(req, res, next) {
 
 // Display detail page for a specific Author.
 exports.author_detail = function(req, res, next) {
-
+    console.log(req.params.id)
+    console.log('why undefined')
     async.parallel({
         author: function(callback) {
             Author.findById(req.params.id)
@@ -88,6 +89,7 @@ exports.author_create_post = [
             author.save(function (err) {
                 if (err) { return next(err); }
                 // Successful - redirect to new author record.
+                console.log(author.url)
                 res.redirect(author.url);
             });
         }

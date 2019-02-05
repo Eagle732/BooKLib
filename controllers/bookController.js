@@ -39,6 +39,7 @@ exports.book_list = function(req, res, next) {
 
 // Display detail page for a specific book.
 exports.book_detail = function(req, res, next) {
+    console.log(req.param.id)
     async.parallel({
         book: function(callback){
             Book.findById(req.param.id)
